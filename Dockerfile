@@ -1,5 +1,5 @@
 # Etapa 1: Construcción (Build)
-FROM gradle:jdk17-alpine AS builder
+FROM gradle:jdk21-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN chmod +x ./gradlew
@@ -7,7 +7,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew build -x test --no-daemon
 
 # Etapa 2: Ejecución (Runtime)
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /app
 # Copiar el jar generado desde la etapa anterior
 COPY --from=builder /app/build/libs/*.jar app.jar
