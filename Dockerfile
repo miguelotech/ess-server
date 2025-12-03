@@ -2,6 +2,7 @@
 FROM gradle:jdk17-alpine AS builder
 WORKDIR /app
 COPY . .
+RUN chmod +x ./gradlew
 # Construir el proyecto saltando los tests para agilizar el deploy (opcional, quitar -x test si quieres tests)
 RUN ./gradlew build -x test --no-daemon
 
