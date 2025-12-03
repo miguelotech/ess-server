@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: ess
+
+  mvc:
+    matching-strategy: ant_path_matcher
+
+  datasource:
+    # Conecta al puerto 5433 de tu máquina (expuesto por Docker)
+    url: jdbc:postgresql://localhost:5433/ess_dashboard
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    # Muestra las consultas SQL en la consola (útil para ver qué hace tu Seeder)
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+    # IMPORTANTE: 'update' crea las tablas automáticamente si no existen
+    # basadas en tus @Entity. Perfecto para desarrollo rápido.
+    hibernate:
+      ddl-auto: update
+
+  # Configuración opcional para Jackson (formato de fechas en JSON)
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: 8080
