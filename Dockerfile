@@ -6,7 +6,7 @@ COPY . .
 RUN ./gradlew build -x test --no-daemon
 
 # Etapa 2: Ejecución (Runtime)
-FROM openjdk:17-alpine
+FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 # Copiar el jar generado desde la etapa anterior
 COPY --from=builder /app/build/libs/*.jar app.jar
